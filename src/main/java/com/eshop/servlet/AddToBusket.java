@@ -38,12 +38,21 @@ public class AddToBusket extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         System.out.println("Kontroller AddToBusket.processRequest>>");
         String productId = request.getParameter("id");
+         HttpSession sess = request.getSession();
+       
+        String idSessii  =sess.getId();
         try {
+
             mshs.addToBusket(Integer.parseInt(productId), getUserId(request), 1);
-            //zdes nuzhno sdelat, chtoby ne perekidyvalo v  korzinu, a dobavlylo
-            // request.getRequestDispatcher("korzina.jsp").forward(request, response);
+
             response.sendRedirect("/MyShop/ProductSrv?id=" + request.getParameter("cid"));
         } catch (SQLException ex) {
+            try {
+                mshs.addToBusket(Integer.parseInt(productId), getUserId(request), 1);
+            } catch (SQLException ex1) {
+                Logger.getLogger(AddToBusket.class.getName()).log(Level.SEVERE, null, ex1);
+                System.out.println("Oshibka dobavleniya v korzinu NoName");
+            }
             ex.printStackTrace();
         }
     }

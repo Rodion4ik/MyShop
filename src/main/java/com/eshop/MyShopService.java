@@ -129,7 +129,24 @@ public class MyShopService {
             c.close();
         }
     }
+ public void addToBusketNoName(int productId, String sessionId, int quantity) throws SQLException {
+        String s = "INSERT into myshop.basket  (session_id,product_id,quantity)  VALUES (?,?,?)";
+        Connection c = getConnection();
+        PreparedStatement p = c.prepareStatement(s);
+        p.setString(1, sessionId);
+        p.setInt(2, productId);
+        p.setInt(3, quantity);
+        try {
+            p.executeUpdate();
 
+        } catch (Exception ex) {
+        } finally {
+
+            p.close();
+            c.close();
+        }
+    }
+    
     public Busket getBusket(int userId) throws SQLException {
         //  User user = new User(userId,null,null);
         List<BusketItem> bi = new ArrayList();
