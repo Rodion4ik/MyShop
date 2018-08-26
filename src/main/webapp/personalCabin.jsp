@@ -14,16 +14,18 @@
     </head>
     <body>
         <div>
-            <%User user = (User)session.getAttribute("user");
-            String name = user.getLogin();
-            String otherInfo = "Zdes mogla by byt vasha reklama";
+            <%User user;
+            String name="noName";
+                try{ user= (User)session.getAttribute("user");
+             name = user.getLogin();
+            String otherInfo = "Zdes mogla by byt vasha reklama";}
+                catch(Exception e){}
             %>
             Login uzverya <%=name%>
             </br>
             fio</br>
             email</br>
-            vzyat s servleta User
-            tovary v korzine
+            <a href="/MyShop/ViewBusket">Товары в корзине</a>
             istoriya pokypok(vtoraya korzina) mozhno na ee osnovanii cheki delat
             (smotra kakoe zakonodatelstvo)
             

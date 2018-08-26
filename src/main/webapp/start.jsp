@@ -59,16 +59,19 @@
             String registration;
             String voyti;
             String usrName;
+            String logOut;
             try {
                 User user = (User) session.getAttribute("user");
 
                 usrName = "<a href=\"/MyShop/personalCabin.jsp\">" + user.getLogin() + "</a>";
                 voyti = "";
                 registration = "";
+                logOut="<a href=\"/MyShop/LogOutServlet\">Выйти из системы</a>";
             } catch (Exception e) {
                 usrName = "";
                 voyti = "Войти";
                 registration = "Регистрация";
+                logOut="";
             }
 
         %>
@@ -76,7 +79,7 @@
             <table>
                 <tr>
 
-                    <td>О сайте</td><td>Контакты</td><td><a href="/MyShop/registration.jsp"><%=registration%></a></td><td><a href="/MyShop/login.jsp"><%=voyti%></a></td><td>Корзина</td><td><%=usrName%></td>
+                    <td>О сайте</td><td>Контакты</td><td><a href="/MyShop/registration.jsp"><%=registration%></a></td><td><a href="/MyShop/login.jsp"><%=voyti%></a></td><td><a href="/MyShop/ViewBusket">Корзина</a></td><td><%=usrName%></td><td><%=logOut%></td>
                 </tr>
             </table>
         </div>
@@ -88,7 +91,7 @@
                         ProductCategory pc = al1.get(i);
 
                 %>
-                <ul> <li><a href="/MyShop/ProductSrv?id=<%=pc.getId()%>"> <%=pc.getCategoryName()%> <%=pc.getId()%></a></li></ul>
+                <ul> <li><a href="/MyShop/ProductSrv?id=<%=pc.getId()%>"> <%=pc.getCategoryName()%> </a></li></ul>
                         <%}
 
                         %>

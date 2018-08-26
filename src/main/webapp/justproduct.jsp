@@ -4,6 +4,7 @@
     Author     : Samsung
 --%>
 
+<%@page import="com.eshop.model.User"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.eshop.model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -15,6 +16,16 @@
     String desc = prod.getDescription();
     int vendor = prod.getVendor_id();
     ArrayList<Integer> photos = prod.getPhotosIds();
+    String addPhoto;
+    User user;
+    try {
+        user = (User) session.getAttribute("user");
+        if(user.getLogin().equals("admin")){
+        addPhoto="<a href=\"\">Добавь фото</a>";
+        }
+    } catch (Exception e) {
+        addPhoto="";
+    }
 %>
 <html>
     <head>
@@ -44,7 +55,7 @@
             <tr>     
 
 
-                <td>Фото</td>
+                <td>Фото</br>добавить фото</td>
                 <td><table><tr><%for (Integer i : photos) {
                         %><tr><td><a onclick="openPhoto(<%=i%>)"><img src="/MyShop/PhotoServlet?id=<%=i%>" alt="альтернативный текст" height="200" width="200"></td></tr></a></td>
                             <%}%></tr></table>

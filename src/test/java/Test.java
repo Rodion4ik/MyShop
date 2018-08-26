@@ -53,14 +53,14 @@ public class Test {
         }
         
      byte[] photo=   mshs.getPhoto(1);
-     String s= photo.toString();
-        System.out.println("s="+s);
-        EMailMessage mail = new EMailMessage("rodion.vlasov@mail.ru", "xxx", "Vy uspeshno zaregistrirovany, proidite po ssylke", "rodion.vlasov@mail.ru", "temaPisma");
-        try {
-            MailService.sendMail(mail);
-            System.out.println("Pismo otpravleno");
-        } catch (Exception ex) {
-            Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//     String s= photo.toString();
+//        System.out.println("s="+s);
+//        EMailMessage mail = new EMailMessage("rodion.vlasov@mail.ru", "xxx", "Vy uspeshno zaregistrirovany, proidite po ssylke", "rodion.vlasov@mail.ru", "temaPisma");
+//        try {
+//            MailService.sendMail(mail);
+//            System.out.println("Pismo otpravleno");
+//        } catch (Exception ex) {
+//            Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 }

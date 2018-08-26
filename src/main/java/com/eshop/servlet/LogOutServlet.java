@@ -1,70 +1,41 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.eshop.servlet;
 
-import com.eshop.MyShopService;
-import com.eshop.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 /**
  *
  * @author Samsung
  */
-@WebServlet(name = "AddToBusket", urlPatterns = {"/AddToBusket"})
-public class AddToBusket extends HttpServlet {
+@WebServlet(name = "LogOutServlet", urlPatterns = {"/LogOutServlet"})
+public class LogOutServlet extends HttpServlet {
 
-    private MyShopService mshs = new MyShopService();
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        System.out.println("Kontroller AddToBusket.processRequest>>");
-        String productId = request.getParameter("id");
         HttpSession sess = request.getSession();
-
-        String idSessii = sess.getId();
-        System.out.println("sessiya. A chto tam?"+sess.getAttribute("user").toString());
         try {
-            if (sess.getAttribute("user") != null) {
-                mshs.addToBusket(Integer.parseInt(productId), getUserId(request), 1);
-                System.out.println("Attribut User"+sess.getAttribute("user"));
-                response.sendRedirect("/MyShop/ProductSrv?id=" + request.getParameter("cid"));
-            } else if (sess.getAttribute("User") == null) {
-                mshs.addToBusketNoName(Integer.parseInt(productId), idSessii, 1);
-                System.out.println("Why here addto busket noName");
-            }
-        } catch (SQLException ex) {
 
-            System.out.println("Ne dobavlen");
-            ex.printStackTrace();
+            sess.removeAttribute("user");
+            System.out.println("udaliliusera iz sessii");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("LogOutNeponyatochka");
         }
-    }
 
-    private int getUserId(HttpServletRequest request) {
-
-//    как получить объект из сесисии  
-        HttpSession sess = request.getSession();
-        User user = (User) sess.getAttribute("user");
-        int user_id = user.getId();
-        return user_id;
+        //  request.getRequestDispatcher("/MyShop/ServiceServlet").forward(request, response);
+        response.sendRedirect("/MyShop/service");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

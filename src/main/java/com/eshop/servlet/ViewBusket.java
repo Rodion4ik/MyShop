@@ -20,18 +20,19 @@ public class ViewBusket extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        
+
         try {
-            User user = (User)session.getAttribute("user");
+            User user = (User) session.getAttribute("user");
             response.setContentType("text/html;charset=UTF-8");
-           // Busket busket = mshs.getBusket(getUserId(request));
-           
+            // Busket busket = mshs.getBusket(getUserId(request));
+
             Busket busket = mshs.getBusket(user.getId());
             //esli user null, to sozdaem korzinu v pamyati.
             request.setAttribute("busket", busket);
             System.out.println(busket.getBusketItems().size());
             request.getRequestDispatcher("korzina.jsp").forward(request, response);
         } catch (SQLException ex) {
+            
             ex.printStackTrace();
         }
 
