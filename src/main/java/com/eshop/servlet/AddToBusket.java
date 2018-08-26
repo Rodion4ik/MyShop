@@ -38,21 +38,21 @@ public class AddToBusket extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         System.out.println("Kontroller AddToBusket.processRequest>>");
         String productId = request.getParameter("id");
-         HttpSession sess = request.getSession();
-       
-        String idSessii  =sess.getId();
+        HttpSession sess = request.getSession();
+
+        String idSessii = sess.getId();
         try {
-
-            mshs.addToBusket(Integer.parseInt(productId), getUserId(request), 1);
-
-            response.sendRedirect("/MyShop/ProductSrv?id=" + request.getParameter("cid"));
-        } catch (SQLException ex) {
-            try {
+            if (sess.getAttribute("User") != null) {
                 mshs.addToBusket(Integer.parseInt(productId), getUserId(request), 1);
-            } catch (SQLException ex1) {
-                Logger.getLogger(AddToBusket.class.getName()).log(Level.SEVERE, null, ex1);
-                System.out.println("Oshibka dobavleniya v korzinu NoName");
+                System.out.println("Attribut User"+sess.getAttribute("User"));
+                response.sendRedirect("/MyShop/ProductSrv?id=" + request.getParameter("cid"));
+            } else if (sess.getAttribute("User") == null) {
+                mshs.addToBusketNoName(Integer.parseInt(productId), idSessii, 1);
+
             }
+        } catch (SQLException ex) {
+
+            System.out.println("Ne dobavlen");
             ex.printStackTrace();
         }
     }

@@ -105,7 +105,7 @@ public class MyShopService {
             p.close();
             c.close();
         }
-        if(prod!=null){
+        if (prod != null) {
             prod.setPhotosIds(getPhotosIdByProductId(id));
         }
         return prod;
@@ -129,8 +129,9 @@ public class MyShopService {
             c.close();
         }
     }
- public void addToBusketNoName(int productId, String sessionId, int quantity) throws SQLException {
-        String s = "INSERT into myshop.basket  (session_id,product_id,quantity)  VALUES (?,?,?)";
+
+    public void addToBusketNoName(int productId, String sessionId, int quantity) throws SQLException {
+        String s = "INSERT into myshop.nonamebasket  (session_id,product_id,quantity)  VALUES (?,?,?)";
         Connection c = getConnection();
         PreparedStatement p = c.prepareStatement(s);
         p.setString(1, sessionId);
@@ -146,7 +147,7 @@ public class MyShopService {
             c.close();
         }
     }
-    
+
     public Busket getBusket(int userId) throws SQLException {
         //  User user = new User(userId,null,null);
         List<BusketItem> bi = new ArrayList();

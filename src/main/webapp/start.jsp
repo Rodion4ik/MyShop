@@ -4,6 +4,7 @@
     Author     : Samsung
 --%>
 
+
 <%@page import="com.eshop.model.User"%>
 <%@page import="com.eshop.model.ProductCategory"%>
 <%@page import="java.util.List"%>
@@ -53,13 +54,23 @@
         </style> 
     </head>
     <body>
-        
-       
+
+        <%
+            String usrName;
+            try {
+                User user = (User) session.getAttribute("user");
+
+                usrName = user.getLogin();
+            } catch (Exception e) {
+                usrName = "";
+            }
+
+        %>
         <div class="block1">
             <table>
                 <tr>
 
-                    <td>О сайте</td><td>Контакты</td><td><a href="/MyShop/registration.jsp">Регистрация</a></td><td><a href="/MyShop/login.jsp">Войти</a></td><td>Корзина</td><td>Личный кабинет</a></td>
+                    <td>О сайте</td><td>Контакты</td><td><a href="/MyShop/registration.jsp">Регистрация</a></td><td><a href="/MyShop/login.jsp">Войти</a></td><td>Корзина</td><td><%=usrName%></td>
                 </tr>
             </table>
         </div>
@@ -72,7 +83,9 @@
 
                 %>
                 <ul> <li><a href="/MyShop/ProductSrv?id=<%=pc.getId()%>"> <%=pc.getCategoryName()%> <%=pc.getId()%></a></li></ul>
-                        <%}%>
+                        <%}
+
+                        %>
             </div>
             <div class="block3"><p><a href=""><img src="images/iphone.jpg" alt="iphone" height="200" width="200"></a></p></div>
         </div>

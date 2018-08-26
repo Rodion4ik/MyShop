@@ -23,7 +23,7 @@ public class UserService {
 
         Connection c = getConnection();
 
-        String s = "select password,email from myshop.user where login =?";
+        String s = "select id,password,email from myshop.user where login =?";
         PreparedStatement p = c.prepareStatement(s);
         p.setString(1, login);
         try {
@@ -33,6 +33,7 @@ public class UserService {
                 user.setLogin(login);
                 user.setPassword(rs.getString("password"));
                 user.setEmail(rs.getString("email"));
+                user.setId(rs.getInt("id"));
                 System.out.println("zapros iz bazy info user  schitalsya" + rs.getString("password"));
             }
         } catch (Exception ex) {
