@@ -56,13 +56,19 @@
     <body>
 
         <%
+            String registration;
+            String voyti;
             String usrName;
             try {
                 User user = (User) session.getAttribute("user");
 
-                usrName = user.getLogin();
+                usrName = "<a href=\"/MyShop/personalCabin.jsp\">" + user.getLogin() + "</a>";
+                voyti = "";
+                registration = "";
             } catch (Exception e) {
                 usrName = "";
+                voyti = "Войти";
+                registration = "Регистрация";
             }
 
         %>
@@ -70,7 +76,7 @@
             <table>
                 <tr>
 
-                    <td>О сайте</td><td>Контакты</td><td><a href="/MyShop/registration.jsp">Регистрация</a></td><td><a href="/MyShop/login.jsp">Войти</a></td><td>Корзина</td><td><%=usrName%></td>
+                    <td>О сайте</td><td>Контакты</td><td><a href="/MyShop/registration.jsp"><%=registration%></a></td><td><a href="/MyShop/login.jsp"><%=voyti%></a></td><td>Корзина</td><td><%=usrName%></td>
                 </tr>
             </table>
         </div>

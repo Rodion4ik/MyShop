@@ -4,6 +4,7 @@
     Author     : Samsung
 --%>
 
+<%@page import="com.eshop.model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,8 +14,14 @@
     </head>
     <body>
         <div>
-            fio
-            email
+            <%User user = (User)session.getAttribute("user");
+            String name = user.getLogin();
+            String otherInfo = "Zdes mogla by byt vasha reklama";
+            %>
+            Login uzverya <%=name%>
+            </br>
+            fio</br>
+            email</br>
             vzyat s servleta User
             tovary v korzine
             istoriya pokypok(vtoraya korzina) mozhno na ee osnovanii cheki delat
